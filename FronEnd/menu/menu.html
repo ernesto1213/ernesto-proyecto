@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Naval</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+
+  <!-- Barra superior -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <h2 id="saludo">Bienvenido 🚀</h2>
+    </div>
+    <div class="navbar-right">
+      <button id="btnInicio">Inicio</button>
+      <button id="btnPerfil">Perfil</button>
+      <button id="btnConfig">Configuración</button>
+      <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+    </div>
+  </header>
+
+  <!-- Contenedor general -->
+  <div class="container">
+
+    <!-- Barra lateral -->
+    <aside class="sidebar">
+      <h3>Panel de Usuario</h3>
+      <div id="menu" class="menu-container">
+        <!-- Aquí el JS agregará los botones -->
+      </div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+      <h1>Centro de Mantenimiento Naval ⚓</h1>
+      <p>Selecciona una opción del panel lateral para continuar.</p>
+      <div id="contenidoRango"></div>
+    </main>
+
+  </div>
+
+  <!-- Script principal -->
+  <script src="menu.js"></script>
+</body>
+</html>
