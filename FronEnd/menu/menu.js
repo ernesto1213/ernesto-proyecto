@@ -68,7 +68,7 @@ function logout() {
 }
 
 // 🌐 Funciones de navegación
-function irACursos() { window.location.href = "cursos.html"; }
+function irACursos() { window.location.href = "../cursos/cursos.html"; }
 function irASimulador() { window.location.href = "simulador.html"; }
 function irAEvaluaciones() { window.location.href = "evaluaciones.html"; }
 function irACertificados() { window.location.href = "certificados.html"; }
