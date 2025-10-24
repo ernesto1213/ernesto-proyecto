@@ -1,0 +1,111 @@
+/* === Estilo general === */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f6f8;
+  color: #333;
+}
+
+/* === Barra de navegación === */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #004080;
+  color: white;
+  padding: 15px 25px;
+}
+
+.navbar h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.navbar button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  margin-left: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.navbar button:hover {
+  background-color: #0056b3;
+}
+
+/* === Contenido principal === */
+.main-content {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-content h3 {
+  color: #004080;
+  margin-bottom: 10px;
+}
+
+.main-content p {
+  line-height: 1.6;
+  margin: 5px 0;
+}
+
+/* === Contenedor del video === */
+.video-container {
+  text-align: center;
+  margin-top: 25px;
+}
+
+video {
+  width: 100%;
+  max-width: 720px;
+  border-radius: 10px;
+  border: 3px solid #007bff;
+  background-color: #000;
+}
+
+/* === Botón de volver === */
+button.volver-btn {
+  display: inline-block;
+  background-color: #6c757d;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button.volver-btn:hover {
+  background-color: #5a6268;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .main-content {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .navbar button {
+    margin-top: 10px;
+  }
+
+  video {
+    max-width: 100%;
+  }
+}

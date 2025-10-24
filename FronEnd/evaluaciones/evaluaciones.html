@@ -2,17 +2,33 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Cursos Técnicos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exámenes Pendientes</title>
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <h1>📘 Cursos Técnicos</h1>
-  <p id="mensaje"></p>
-  
-  <div id="lista-cursos" class="contenedor-cursos"></div>
 
-  <button onclick="volverAlMenu()">⬅️ Volver al Menú</button>
+  <header class="navbar">
+    <h2>📝 Exámenes Pendientes</h2>
+    <button onclick="volverAlMenu()">⬅️ Volver al Menú</button>
+  </header>
 
-  <script src="cursos.js"></script>
+  <main class="main-content">
+    <aside class="menu-lateral">
+      <h3>Menú</h3>
+      <ul>
+        <li><a href="../menu/menu.html">Inicio</a></li>
+        <li><a href="../cursos.html">Cursos</a></li>
+        <li><a href="../evaluaciones.html">Exámenes</a></li>
+      </ul>
+    </aside>
+
+    <section class="contenido-principal">
+      <p id="mensaje"></p>
+      <div id="lista-cursos" class="contenedor-cursos"></div>
+    </section>
+  </main>
+
+  <script src="evaluaciones.js"></script>
 </body>
 </html>

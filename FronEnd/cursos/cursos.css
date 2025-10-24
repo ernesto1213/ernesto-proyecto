@@ -1,0 +1,88 @@
+/* Reset y tipografía */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Navbar fijo arriba */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #4b6cb7;
+  color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+/* Contenido principal debajo del navbar */
+.main-content {
+  display: flex;
+  margin-top: 70px; /* altura del navbar */
+  height: calc(100vh - 70px);
+}
+
+/* Menú lateral */
+.menu-lateral {
+  width: 200px;
+  background-color: #f1f1f1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.menu-lateral ul {
+  list-style: none;
+}
+
+.menu-lateral li {
+  margin: 0.5rem 0;
+}
+
+.menu-lateral a {
+  text-decoration: none;
+  color: #333;
+}
+
+.menu-lateral a:hover {
+  color: #4b6cb7;
+}
+
+/* Contenido principal de exámenes */
+.contenido-principal {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.contenedor-cursos .curso-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.contenedor-cursos .curso-card button {
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background-color: #4b6cb7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contenedor-cursos .curso-card button:hover {
+  background-color: #3a539b;
+}

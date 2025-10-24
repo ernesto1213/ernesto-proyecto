@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("userId");
   const mensaje = document.getElementById("mensaje");
   const lista = document.getElementById("lista-cursos");
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
 
   if (!token || !userId) {
     mensaje.textContent = "⚠️ No has iniciado sesión.";
@@ -10,45 +10,51 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const response = await fetch("http://localhost:8080/api/cursos", {
+    // 🔹 Llamada a la API (equivalente al curl)
+    const res = await fetch(`http://localhost:8080/api/examenes/instructor/${userId}`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
+        "Accept": "application/json",
         "Authorization": `Bearer ${token}`
       }
     });
 
-    if (!response.ok) throw new Error("Error al obtener cursos");
+    if (!res.ok) throw new Error("Error al obtener los exámenes del instructor");
 
-    const cursos = await response.json();
-    console.log("📚 Cursos obtenidos:", cursos);
+    const examenes = await res.json();
 
-    if (cursos.length === 0) {
-      lista.innerHTML = "<p>No hay cursos disponibles.</p>";
+    if (examenes.length === 0) {
+      lista.innerHTML = "<p>No tienes exámenes registrados.</p>";
       return;
     }
 
-    cursos.forEach(curso => {
+    // 🔹 Mostrar exámenes
+    examenes.forEach(examen => {
       const div = document.createElement("div");
       div.className = "curso-card";
       div.innerHTML = `
-        <h3>${curso.nombre}</h3>
-        <p>${curso.descripcion}</p>
-        <button onclick="verDetalles(${curso.id})">Ver Detalles</button>
+        <h3>${examen.nombre || "Examen sin nombre"}</h3>
+        <p><strong>Curso:</strong> ${examen.curso?.nombre || "No especificado"}</p>
+        <p><strong>Descripción:</strong> ${examen.descripcion || "Sin descripción disponible"}</p>
+        <button onclick="verExamen(${examen.id})">📄 Ver Examen</button>
       `;
       lista.appendChild(div);
     });
 
+    mensaje.textContent = "📘 Estos son tus exámenes registrados:";
+
   } catch (error) {
-    console.error("🚨 Error:", error);
-    mensaje.textContent = "Error al cargar los cursos.";
+    console.error("🚨 Error al cargar exámenes:", error);
+    mensaje.textContent = "❌ No se pudieron cargar los exámenes.";
   }
 });
 
-function verDetalles(id) {
-  window.location.href = `curso-detalle.html?id=${id}`;
+// 🔹 Ver detalles del examen
+function verExamen(examenId) {
+  window.location.href = `../evaluaciones/examen/examen.html?examenId=${examenId}`;
 }
 
+// 🔹 Volver al menú
 function volverAlMenu() {
   window.location.href = "../menu/menu.html";
 }

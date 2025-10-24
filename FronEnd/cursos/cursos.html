@@ -2,16 +2,40 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cursos Técnicos</title>
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../menu/menu.css">
 </head>
 <body>
-  <h1>📘 Cursos Técnicos</h1>
-  <p id="mensaje"></p>
-  
-  <div id="lista-cursos" class="contenedor-cursos"></div>
 
-  <button onclick="volverAlMenu()">⬅️ Volver al Menú</button>
+  <!-- Barra superior -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <h2 id="saludo">Bienvenido 🚀</h2>
+    </div>
+    <div class="navbar-right">
+      <button onclick="volverAlMenu()">⬅️ Volver al Menú</button>
+      <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+    </div>
+  </header>
+
+  <!-- Contenedor general -->
+  <div class="container">
+    
+    <!-- Barra lateral -->
+    <aside class="sidebar">
+      <h3>Panel de Usuario</h3>
+      <div id="menu" class="menu-container"></div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+      <h1>📘 Cursos Técnicos</h1>
+      <p id="mensaje"></p>
+      <div id="lista-cursos" class="contenedor-cursos"></div>
+    </main>
+
+  </div>
 
   <script src="cursos.js"></script>
 </body>
