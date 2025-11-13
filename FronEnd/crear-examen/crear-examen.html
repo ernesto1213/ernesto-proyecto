@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Crear Examen</title>
+  <link rel="stylesheet" href="crear-examen.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 Crear Nuevo Examen</h1>
+
+    <form id="formExamen">
+      <div class="campo">
+        <label for="titulo">Título del examen:</label>
+        <input type="text" id="titulo" required>
+      </div>
+
+      <div class="campo">
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" required>
+      </div>
+
+      <div class="campo">
+        <label for="instructorId">ID del Instructor:</label>
+        <input type="number" id="instructorId" required>
+      </div>
+
+      <h2>Preguntas</h2>
+      <div id="preguntas"></div>
+
+      <button type="button" id="agregarPregunta">➕ Agregar Pregunta</button>
+      <button type="submit" id="crearExamen">📤 Crear Examen</button>
+    </form>
+
+    <p id="mensaje"></p>
+  </div>
+
+  <script src="crear-examen.js"></script>
+</body>
+</html>

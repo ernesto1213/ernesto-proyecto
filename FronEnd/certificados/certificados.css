@@ -1,0 +1,118 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f9fc;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #0056b3;
+}
+
+#mensaje {
+  text-align: center;
+  font-size: 1.1em;
+  margin-bottom: 20px;
+}
+
+.contenedor-cursos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.curso {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  background: #fafafa;
+}
+
+.curso h3 {
+  color: #0078d7;
+}
+
+.curso p {
+  font-size: 0.9em;
+}
+
+.btn-volver {
+  display: block;
+  margin: 30px auto 0;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.btn-volver:hover {
+  background: #c0392b;
+}
+
+#btn-certificado {
+  display: block;
+  margin: 20px auto;
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+#btn-certificado:hover {
+  background: #219150;
+}
+
+.btn-oculto {
+  display: none;
+}
+.curso {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px 0;
+  background: #fafafa;
+}
+
+.curso.aprobado {
+  border-color: #28a745;
+  background-color: #e6ffed;
+}
+
+.curso.reprobado {
+  border-color: #dc3545;
+  background-color: #ffe6e6;
+}
+
+#btn-certificado {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#btn-certificado:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}

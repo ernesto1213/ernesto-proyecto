@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gestión de Usuarios sin Rango</title>
+
+  <!-- Tu CSS -->
+  <link rel="stylesheet" href="css/gestion-usuarios.css" />
+  <!-- Dexie CDN (IndexedDB simplificado) -->
+  <script src="https://cdn.jsdelivr.net/npm/dexie@3/dist/dexie.min.js"></script>
+</head>
+<body>
+  <h1>Usuarios sin rango</h1>
+
+  <div id="status" style="text-align:center; margin:8px 0;">Comprobando conexión...</div>
+  <div id="loading" class="loading">Cargando usuarios...</div>
+  <div id="error" class="error" style="display:none;"></div>
+
+  <table id="tablaUsuarios" style="display:none;">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Rango</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody id="tablaBody"></tbody>
+  </table>
+
+  <!-- IndexedDB + sync + app logic -->
+   <script src="gestion-usuarios.js"></script>
+  <script src="db.js"></script>
+  <script src="sync.js"></script>
+  <script src="gestion-usuarios.js"></script>
+</body>
+</html>

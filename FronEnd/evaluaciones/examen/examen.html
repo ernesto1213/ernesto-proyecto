@@ -2,15 +2,37 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Examen</title>
-  <link rel="stylesheet" href="../style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contestar Examen</title>
+  <link rel="stylesheet" href="examen.css">
 </head>
 <body>
-  <h1>📝 Contestar Examen</h1>
-  <p id="mensaje"></p>
-  <div id="preguntas-contenedor" class="contenedor-cursos"></div>
-  <button id="enviar-examen">✅ Enviar Examen</button>
-  <button onclick="volverACursos()">⬅️ Volver a Exámenes</button>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <h2>📝 Contestar Examen</h2>
+    </div>
+    <div class="navbar-right">
+      <button class="volver-btn" onclick="volverAExamenes()">⬅️ Volver</button>
+    </div>
+  </header>
+
+  <!-- Contenedor principal -->
+  <main class="main-content">
+    <section class="examen-container">
+      <h1>Evaluación del Curso</h1>
+      <p id="mensaje" class="mensaje"></p>
+
+      <div id="preguntas-contenedor" class="preguntas"></div>
+
+      <div class="acciones">
+        <button id="enviar-examen" class="btn-enviar">✅ Enviar Examen</button>
+      </div>
+
+      <p id="resultado" class="resultado"></p>
+    </section>
+  </main>
 
   <script src="examen.js"></script>
 </body>

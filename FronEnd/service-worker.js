@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mantenimiento-naval-v1';
+const CACHE_NAME = 'mantenimiento-naval-v2';
 const ARCHIVOS_PARA_CACHE = [
   '/',
   '/index.html',
@@ -27,11 +27,26 @@ self.addEventListener('activate', event => {
   console.log('🧹 Cachés antiguos eliminados');
 });
 
-// Interceptar peticiones y responder desde caché
+// Interceptar peticiones
 self.addEventListener('fetch', event => {
+  const { request } = event;
+
+  // 🔒 No interceptar peticiones a la API backend (localhost:8080)
+  if (request.url.includes('localhost:8080')) {
+    return; // Deja que vayan directo al servidor
+  }
+
+  // Para todo lo demás (archivos estáticos)
   event.respondWith(
-    caches.match(event.request).then(respuesta =>
-      respuesta || fetch(event.request)
+    caches.match(request).then(respuesta =>
+      respuesta ||
+      fetch(request).then(fetchRes => {
+        // Guarda en caché nuevas respuestas
+        return caches.open(CACHE_NAME).then(cache => {
+          cache.put(request, fetchRes.clone());
+          return fetchRes;
+        });
+      }).catch(() => caches.match('/index.html'))
     )
   );
 });

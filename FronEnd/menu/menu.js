@@ -24,6 +24,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       <button class="menu-button" onclick="irASimulador()">⚙️ Simulador</button>
       <button class="menu-button" onclick="irAEvaluaciones()">🧠 Evaluaciones</button>
       <button class="menu-button" onclick="irACertificados()">📜 Certificados</button>
+      <button class="menu-button" onclick="irACrearExamenes()">📜 Crear Examenes</button>
+      <button class="menu-button" onclick="irAGestionUsuarios()">👥 Gestionar Usuarios</button>
     `;
   } else if (rango === 2) {
     menuDiv.innerHTML = `
@@ -70,6 +72,8 @@ function irACursos() { window.location.href = "../cursos/cursos.html"; }
 function irASimulador() { window.location.href = "../simulador/simulador.html"; }
 function irAEvaluaciones() { window.location.href = "../evaluaciones/evaluaciones.html"; }
 function irACertificados() { window.location.href = "../certificados/certificados.html"; }
+function irACrearExamenes() { window.location.href = "../crear-examen/crear-examen.html"; }
+function irAGestionUsuarios() {window.location.href = "../gestion-usuarios/gestion-usuarios.html";}
 
 function irAGestion() { window.location.href = "gestion.html"; }
 function irAEstadisticas() { window.location.href = "estadisticas.html"; }

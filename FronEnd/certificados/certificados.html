@@ -3,16 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <title>Cursos Técnicos</title>
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="certificados.css">
 </head>
 <body>
-  <h1>📘 Cursos Técnicos</h1>
-  <p id="mensaje"></p>
-  
-  <div id="lista-cursos" class="contenedor-cursos"></div>
+  <div class="container">
+    <h1>📘 Cursos Técnicos</h1>
+    <p id="mensaje"></p>
 
-  <button onclick="volverAlMenu()">⬅️ Volver al Menú</button>
+    <div id="lista-cursos" class="contenedor-cursos"></div>
 
-  <script src="cursos.js"></script>
+    <!-- Botón de certificado oculto al inicio -->
+    <button id="btn-certificado" class="btn-oculto">🎓 Descargar Certificado</button>
+
+    <button class="btn-volver" onclick="volverAlMenu()">⬅️ Volver al Menú</button>
+  </div>
+
+  <script src="certificados.js"></script>
 </body>
 </html>
