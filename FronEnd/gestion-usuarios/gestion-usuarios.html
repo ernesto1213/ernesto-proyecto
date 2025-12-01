@@ -1,40 +1,69 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gestión de Usuarios sin Rango</title>
-
-  <!-- Tu CSS -->
-  <link rel="stylesheet" href="css/gestion-usuarios.css" />
-  <!-- Dexie CDN (IndexedDB simplificado) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuarios sin Rango</title>
+  <link rel="stylesheet" href="../menu/menu.css"> <!-- navbar y sidebar -->
+  <link rel="stylesheet" href="gestion-usuarios.css"> <!-- tu CSS específico -->
   <script src="https://cdn.jsdelivr.net/npm/dexie@3/dist/dexie.min.js"></script>
 </head>
 <body>
-  <h1>Usuarios sin rango</h1>
 
-  <div id="status" style="text-align:center; margin:8px 0;">Comprobando conexión...</div>
-  <div id="loading" class="loading">Cargando usuarios...</div>
-  <div id="error" class="error" style="display:none;"></div>
+  <!-- Navbar -->
+  <header class="navbar">
+    <h2>👤 Usuarios</h2>
+    <div class="navbar-right">
+      <button onclick="volverAlMenu()">⬅️ Volver al Menú</button>
+      <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+    </div>
+  </header>
 
-  <table id="tablaUsuarios" style="display:none;">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Email</th>
-        <th>Password</th>
-        <th>Rango</th>
-        <th>Acción</th>
-      </tr>
-    </thead>
-    <tbody id="tablaBody"></tbody>
-  </table>
+  <div class="container">
 
-  <!-- IndexedDB + sync + app logic -->
-   <script src="gestion-usuarios.js"></script>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h3>Panel de Usuarios</h3>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+      <h1>📋 Usuarios sin Rango</h1>
+      <p id="mensaje">Aquí se muestran los usuarios que aún no tienen asignado un rango.</p>
+
+      <div id="status" class="status">Comprobando conexión...</div>
+      <div id="loading" class="loading">Cargando usuarios...</div>
+      <div id="error" class="error" style="display:none;"></div>
+
+      <div class="table-container">
+        <table id="tablaUsuarios">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>Rango</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="tablaBody"></tbody>
+        </table>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="gestion-usuarios.js"></script>
   <script src="db.js"></script>
   <script src="sync.js"></script>
   <script src="gestion-usuarios.js"></script>
+  <script>
+    function volverAlMenu() {
+      window.location.href = "../index.html";
+    }
+  </script>
+
 </body>
 </html>

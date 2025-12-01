@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       // Llamada directa al backend usando fetch
-      const response = await fetch("http://localhost:8080/api/login/login", {
+      const response = await fetch("https://nuevo-production-e70c.up.railway.app/api/login/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,8 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const userId = data.id;
       const token = data.token;
+      const rango = data.rango;
 localStorage.setItem('userId', userId); // clave exacta
 localStorage.setItem('token', token);
+localStorage.setItem('rango', rango);
       console.log("📩 Respuesta login:", data);
 
       if (response.ok && data.status === "ok") {

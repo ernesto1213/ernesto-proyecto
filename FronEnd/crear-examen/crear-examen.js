@@ -4,6 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("formExamen");
   const mensaje = document.getElementById("mensaje");
 
+  const userId = parseInt(localStorage.getItem("userId")); // 🔹 ESTO SERÁ EL INSTRUCTOR
+
+  if (!userId) {
+    mensaje.textContent = "⚠️ Error: no hay usuario registrado.";
+    mensaje.style.color = "red";
+    return;
+  }
+
   agregarBtn.addEventListener("click", agregarPregunta);
 
   function agregarPregunta() {
@@ -32,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const opcionesDiv = preguntaDiv.querySelector(".opciones");
     const opcionDiv = document.createElement("div");
     opcionDiv.classList.add("opcion");
+
     opcionDiv.innerHTML = `
       <input type="text" class="textoOpcion" placeholder="Texto de la opción" required>
       <label><input type="checkbox" class="esCorrecta"> Correcta</label>
@@ -46,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const titulo = document.getElementById("titulo").value;
     const descripcion = document.getElementById("descripcion").value;
-    const instructorId = parseInt(document.getElementById("instructorId").value);
+
     const preguntas = [];
 
     document.querySelectorAll(".pregunta").forEach(p => {
@@ -66,12 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const examenData = {
       titulo,
       descripcion,
-      instructor: { id: instructorId },
+      instructor: { id: userId },   // 🔥 AUTO ASIGNAR EL INSTRUCTOR
       preguntas
     };
 
     try {
-      const res = await fetch("http://localhost:8080/api/examenes/crear", {
+      const res = await fetch("https://nuevo-production-e70c.up.railway.app/api/examenes/crear", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(examenData)
@@ -79,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (res.ok) {
         const data = await res.json();
-        mensaje.textContent = `✅ Examen creado correctamente con ID ${data.id || "(sin ID)"}`;
+        mensaje.textContent = `✅ Examen creado correctamente con ID ${data.id}`;
         mensaje.style.color = "green";
         form.reset();
         preguntasDiv.innerHTML = "";
@@ -95,3 +104,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+function volverAlMenu() {
+  window.location.href = "../index.html";
+}
+function logout() {
+  localStorage.clear();
+  window.location.href = "../../index.html";
+}

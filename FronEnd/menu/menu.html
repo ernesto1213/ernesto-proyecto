@@ -5,6 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel Naval</title>
   <link rel="stylesheet" href="menu.css">
+  <style>
+    /* Estilos de temperatura */
+    .temperatura-card {
+      background: #0b3d91; /* azul naval */
+      color: #fff;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .temperatura-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    .temperatura-card p {
+      font-size: 1.2rem;
+      margin: 5px 0;
+    }
+  </style>
 </head>
 <body>
 
@@ -14,9 +35,6 @@
       <h2 id="saludo">Bienvenido 🚀</h2>
     </div>
     <div class="navbar-right">
-      <button id="btnInicio">Inicio</button>
-      <button id="btnPerfil">Perfil</button>
-      <button id="btnConfig">Configuración</button>
       <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
     </div>
   </header>
@@ -36,6 +54,15 @@
     <main class="main-content">
       <h1>Centro de Mantenimiento Naval ⚓</h1>
       <p>Selecciona una opción del panel lateral para continuar.</p>
+
+      <!-- Contenedor de temperatura -->
+      <div id="temperatura-container" class="temperatura-card">
+        <h2>Última Lectura del Sensor ⚓</h2>
+        <p id="temperaturaValor">Cargando...</p>
+        <p id="temperaturaHora"></p>
+      </div>
+
+      <!-- Cursos -->
       <div id="contenidoRango"></div>
       <div id="lista-cursos" class="contenedor-cursos"></div>
     </main>

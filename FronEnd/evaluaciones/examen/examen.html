@@ -4,36 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contestar Examen</title>
-  <link rel="stylesheet" href="examen.css">
+
+  <!-- Estilos globales -->
+<link rel="stylesheet" href="../../menu/menu.css">
+<link rel="stylesheet" href="examen.css">
+
 </head>
+
 <body>
 
-  <!-- Navbar -->
+  <!-- 🔹 NAVBAR -->
   <header class="navbar">
-    <div class="navbar-left">
-      <h2>📝 Contestar Examen</h2>
-    </div>
+    <h2>📝 Contestar Examen</h2>
+
     <div class="navbar-right">
-      <button class="volver-btn" onclick="volverAExamenes()">⬅️ Volver</button>
+      <button onclick="volverAExamenes()">⬅️ Volver</button>
+      <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
     </div>
   </header>
 
-  <!-- Contenedor principal -->
-  <main class="main-content">
-    <section class="examen-container">
-      <h1>Evaluación del Curso</h1>
+  <div class="container">
+
+    <!-- 🔹 SIDEBAR -->
+    <aside class="sidebar">
+      <h3>Panel de Examen</h3>
+      <div id="menu" class="menu-container"></div>
+    </aside>
+
+    <!-- 🔹 CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+
+      <h1>📘 Evaluación del Curso</h1>
       <p id="mensaje" class="mensaje"></p>
 
+      <!-- Aquí se cargan dinámicamente las preguntas -->
       <div id="preguntas-contenedor" class="preguntas"></div>
 
       <div class="acciones">
-        <button id="enviar-examen" class="btn-enviar">✅ Enviar Examen</button>
+        <button id="enviar-examen" class="btn-principal">✅ Enviar Examen</button>
       </div>
+      <h2 id="timer" class="timer">⏳ Tiempo restante: --:--</h2>
 
       <p id="resultado" class="resultado"></p>
-    </section>
-  </main>
+    </main>
 
+  </div>
+
+  <!-- SCRIPT -->
   <script src="examen.js"></script>
 </body>
 </html>
+ 

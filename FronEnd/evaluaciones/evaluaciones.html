@@ -4,22 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cursos Técnicos</title>
-  <link rel="stylesheet" href="../menu/menu.css">
+<link rel="stylesheet" href="../menu/menu.css?v=1.0.0">
 </head>
 <body>
 
   <header class="navbar">
     <h2>📝 Exámenes Pendientes</h2>
-    <button onclick="volverAlMenu()">⬅️ Volver al Menú</button>
+    <div class="navbar-right">
+      <button onclick="volverAlMenu()">⬅️ Volver al Menú</button>
+      <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+    </div>
   </header>
 
-  <main class="main-content">
-    <section class="contenido-principal">
+  <div class="container">
+    
+    <!-- Barra lateral -->
+    <aside class="sidebar">
+      <h3>Panel de Evaluaciones</h3>
+      <div id="menu" class="menu-container"></div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+      <h1>📘 Exámenes Pendientes</h1>
       <p id="mensaje"></p>
       <div id="lista-cursos" class="contenedor-cursos"></div>
-    </section>
-  </main>
+    </main>
 
-  <script src="evaluaciones.js"></script>
+  </div>
+<script src="evaluaciones.js"></script>
 </body>
 </html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Examen</title>
+
+  <link rel="stylesheet" href="../menu/menu.css">
+  <link rel="stylesheet" href="edit-examenes.css">
+</head>
+
+<body>
+
+  <!-- 🔹 NAVBAR -->
+  <header class="navbar">
+    <h2>✏️ Editar Examen</h2>
+    <div class="navbar-right">
+      <button onclick="volverAlMenu()">⬅️ Volver al Menú</button>
+      <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- 🔹 SIDEBAR -->
+    <aside class="sidebar">
+      <h3>Panel de Edición</h3>
+      <div id="menu" class="menu-container"></div>
+    </aside>
+
+    <!-- 🔹 CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+
+      <h1>🔧 Selecciona un examen para editar</h1>
+
+      <div class="campo">
+        <label for="examenSelect">Selecciona un examen:</label>
+        <select id="examenSelect">
+            <option value="">--Selecciona--</option>
+        </select>
+      </div>
+
+      <!-- 🔥 Botón eliminar examen -->
+      <button id="btnEliminarExamen" class="btn-eliminarPregunta" style="display:none;">
+        🗑️ Eliminar Examen
+      </button>
+
+      <form id="editor" class="formulario-examen" style="display:none;">
+
+        <div class="campo">
+          <label for="titulo">Título del Examen:</label>
+          <input type="text" id="titulo">
+        </div>
+
+        <div class="campo">
+          <label for="descripcion">Descripción:</label>
+          <textarea id="descripcion"></textarea>
+        </div>
+
+        <h2 class="subtitulo">📝 Preguntas</h2>
+
+        <div id="preguntasContainer" class="contenedor-preguntas">
+          <button type="button" id="addPreguntaBtn" class="btn-secundario">➕ Agregar Pregunta</button>
+        </div>
+
+        <button type="button" id="guardarExamenBtn" class="btn-principal">
+          💾 Guardar Cambios
+        </button>
+
+      </form>
+
+      <p id="mensaje" class="mensaje"></p>
+
+    </main>
+
+  </div>
+
+  <!-- 🔥 MODAL DE CONFIRMACIÓN -->
+  <div id="modalEliminar" class="modal">
+    <div class="modal-content">
+      <h3>¿Seguro que deseas eliminar este examen?</h3>
+      <p>Esta acción es irreversible.</p>
+
+      <button id="confirmarEliminar" class="btn-eliminarPregunta btn-full">
+        Sí, eliminar definitivamente
+      </button>
+
+      <button id="cancelarEliminar" class="btn-cancelar btn-full">
+        Cancelar
+      </button>
+    </div>
+  </div>
+
+  <script src="edit-examenes.js"></script>
+</body>
+</html>

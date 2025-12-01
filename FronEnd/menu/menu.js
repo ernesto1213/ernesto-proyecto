@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 });
+
 document.addEventListener("DOMContentLoaded", async () => {
   const saludoDiv = document.getElementById("saludo");
   const menuDiv = document.getElementById("menu");
@@ -14,30 +15,27 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Obtener datos de usuario
   const userName = localStorage.getItem("userName") || "Usuario";
-  const rango = parseInt(localStorage.getItem("userRango")) || 1; // 1=normal, 2=intermedio, 3=admin
+  const rango = localStorage.getItem("rango") || "Estudiante"; // 1=normal, 2=intermedio, 3=admin
+  console.log("rango: "+rango);
+  
   saludoDiv.textContent = `Bienvenido, ${userName} 🚀`;
 
   // Mostrar botones según rango
-  if (rango === 1) {
+  if (rango === "Admin" || rango === "Jefe") {
+    menuDiv.innerHTML = `
+<button class="menu-button" onclick="irACursos()">📘 Cursos Técnicos</button>
+<button class="menu-button" onclick="irAEvaluaciones()">📝 Evaluaciones</button>
+<button class="menu-button" onclick="irACertificados()">🎓 Certificados</button>
+<button class="menu-button" onclick="irAEditarExamenes()">✏️ Editar Exámenes</button>
+<button class="menu-button" onclick="irACrearExamenes()">➕ Crear Exámenes</button>
+<button class="menu-button" onclick="irAGestionUsuarios()">👥 Gestionar Usuarios</button>
+
+    `;
+  } else if (rango === "Estudiante" || rango ==="Tecnico") {
     menuDiv.innerHTML = `
       <button class="menu-button" onclick="irACursos()">📘 Cursos Técnicos</button>
-      <button class="menu-button" onclick="irASimulador()">⚙️ Simulador</button>
       <button class="menu-button" onclick="irAEvaluaciones()">🧠 Evaluaciones</button>
       <button class="menu-button" onclick="irACertificados()">📜 Certificados</button>
-      <button class="menu-button" onclick="irACrearExamenes()">📜 Crear Examenes</button>
-      <button class="menu-button" onclick="irAGestionUsuarios()">👥 Gestionar Usuarios</button>
-    `;
-  } else if (rango === 2) {
-    menuDiv.innerHTML = `
-      <button class="menu-button" onclick="irAGestion()">📂 Gestión de Contenidos</button>
-      <button class="menu-button" onclick="irAEstadisticas()">📊 Desempeño</button>
-      <button class="menu-button" onclick="irAPracticas()">🧰 Panel de Prácticas</button>
-    `;
-  } else if (rango === 3) {
-    menuDiv.innerHTML = `
-      <button class="menu-button" onclick="irAUsuarios()">👥 Gestión de Usuarios</button>
-      <button class="menu-button" onclick="irAReportes()">📈 Reportes</button>
-      <button class="menu-button" onclick="irAIntegraciones()">🔗 Integraciones</button>
     `;
   }
 
@@ -59,9 +57,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   } catch (err) {
     console.error("Error al cargar cursos:", err);
-    lista.innerHTML = "<p>No se pudieron cargar los cursos.</p>";
   }
+
+  // Inicializar actualización de temperatura
+  actualizarTemperatura();
+  setInterval(actualizarTemperatura, 3000); // cada 3 segundos
 });
+
 // Abrir curso en nueva pestaña
 function abrirCurso(url) {
   window.open(url, "_blank");
@@ -69,11 +71,11 @@ function abrirCurso(url) {
 
 // Funciones de navegación
 function irACursos() { window.location.href = "../cursos/cursos.html"; }
-function irASimulador() { window.location.href = "../simulador/simulador.html"; }
+function irAEditarExamenes() { window.location.href = "../editExamenes/edit-examenes.html"; }
 function irAEvaluaciones() { window.location.href = "../evaluaciones/evaluaciones.html"; }
 function irACertificados() { window.location.href = "../certificados/certificados.html"; }
 function irACrearExamenes() { window.location.href = "../crear-examen/crear-examen.html"; }
-function irAGestionUsuarios() {window.location.href = "../gestion-usuarios/gestion-usuarios.html";}
+function irAGestionUsuarios() { window.location.href = "../gestion-usuarios/gestion-usuarios.html"; }
 
 function irAGestion() { window.location.href = "gestion.html"; }
 function irAEstadisticas() { window.location.href = "estadisticas.html"; }
@@ -84,9 +86,27 @@ function irAReportes() { window.location.href = "reportes.html"; }
 function irAIntegraciones() { window.location.href = "integraciones.html"; }
 
 // Logout
-// 🔒 Cerrar sesión
 function logout() {
-  localStorage.clear(); // elimina token, userId, etc.
-  window.location.href = "../login/login.html"; // redirige al login
+  localStorage.clear();
+  window.location.href = "../index.html";
 }
 
+// ======== API Temperatura ========
+async function actualizarTemperatura() {
+  try {
+    const response = await fetch("https://nuevo-production-e70c.up.railway.app/api/evaluaciones/ultimaTemperatura");
+    if (!response.ok) throw new Error("Error al obtener la temperatura");
+    const data = await response.json();
+
+    document.getElementById("temperaturaValor").textContent = 
+      `Ambiente: ${data.ambiente} °C | Objeto: ${data.objeto} °C`;
+
+    const fecha = new Date(data.timestamp || Date.now());
+    document.getElementById("temperaturaHora").textContent = 
+      `Última actualización: ${fecha.toLocaleTimeString()}`;
+
+  } catch (err) {
+    console.error(err);
+    document.getElementById("temperaturaValor").textContent = "No se pudo cargar la temperatura.";
+  }
+}

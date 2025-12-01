@@ -64,5 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function volverAlMenu() {
-  window.location.href = "../menu/menu.html";
+  window.location.href = "../index.html";
+}
+function logout() {
+  localStorage.clear();
+  window.location.href = "../../index.html";
 }

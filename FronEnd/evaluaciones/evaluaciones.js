@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     // 🔹 Obtener todos los exámenes disponibles
-    const resExamenes = await fetch(`http://localhost:8080/api/examenes/todos`, {
+    const resExamenes = await fetch(`https://nuevo-production-e70c.up.railway.app/api/examenes/todos`, {
       headers: {
         "Accept": "application/json",
         "Authorization": `Bearer ${token}`
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const examenes = await resExamenes.json();
 
     // 🔹 Obtener los resultados del alumno (exámenes respondidos)
-    const resResultados = await fetch(`http://localhost:8080/api/examenes/resultados/alumno/${userId}`, {
+    const resResultados = await fetch(`https://nuevo-production-e70c.up.railway.app/api/examenes/resultados/alumno/${userId}`, {
       headers: {
         "Authorization": `Bearer ${token}`,
         "Accept": "application/json"
@@ -83,4 +83,8 @@ function verExamen(examenId) {
 // 🔹 Volver al menú
 function volverAlMenu() {
   window.location.href = "../index.html";
+}
+function logout() {
+  localStorage.clear();
+  window.location.href = "../../index.html";
 }

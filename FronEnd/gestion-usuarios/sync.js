@@ -2,7 +2,7 @@
 // Sincronizador simple: procesa pendingOps en IndexedDB cuando hay conexión.
 // Asegúrate de definir BASE_URL correctamente.
 
-const BASE_URL = "http://localhost:8080"; // <- ajusta si tu API está en otro host/puerto
+const BASE_URL = "https://nuevo-production-e70c.up.railway.app"; // <- ajusta si tu API está en otro host/puerto
 
 // Procesa una operación pendiente
 async function processOp(op) {

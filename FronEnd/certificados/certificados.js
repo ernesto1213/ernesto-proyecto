@@ -11,9 +11,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
+  // 🔍 Verificar si ya existe un certificado previamente generado
+  let certificadoExiste = false;
   try {
-    // 🔹 Obtener todos los exámenes disponibles
-    const resExamenes = await fetch(`http://localhost:8080/api/examenes/todos`, {
+    const resExiste = await fetch(`https://nuevo-production-e70c.up.railway.app/api/certificados/existe/${userId}`, {
+      headers: { "Authorization": `Bearer ${token}` }
+    });
+
+    if (resExiste.ok) {
+      const data = await resExiste.json();
+      certificadoExiste = data.existe === true;
+    }
+  } catch (err) {
+    console.warn("No se pudo verificar si existe el certificado.");
+  }
+
+  try {
+    const resExamenes = await fetch(`https://nuevo-production-e70c.up.railway.app/api/examenes/todos`, {
       headers: {
         "Accept": "application/json",
         "Authorization": `Bearer ${token}`
@@ -22,8 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!resExamenes.ok) throw new Error("Error al obtener exámenes");
     const examenes = await resExamenes.json();
 
-    // 🔹 Obtener los resultados del alumno (exámenes respondidos)
-    const resResultados = await fetch(`http://localhost:8080/api/examenes/resultados/alumno/${userId}`, {
+    const resResultados = await fetch(`https://nuevo-production-e70c.up.railway.app/api/examenes/resultados/alumno/${userId}`, {
       headers: {
         "Authorization": `Bearer ${token}`,
         "Accept": "application/json"
@@ -32,14 +45,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!resResultados.ok) throw new Error("Error al obtener resultados");
     const resultados = await resResultados.json();
 
-    // 🔹 Convertir resultados a un mapa: examenId -> calificación
     const resultadosMap = {};
     resultados.forEach(r => {
       const examenId = r.examen?.id || r.examenId || r.idExamen;
       if (examenId) resultadosMap[examenId] = r.calificacion;
     });
 
-    // 🔹 Mostrar exámenes con su estado
     listaCursos.innerHTML = "";
     let todosRespondidos = true;
     let todosAprobados = true;
@@ -49,26 +60,28 @@ document.addEventListener("DOMContentLoaded", async () => {
       const respondido = calificacion !== undefined;
       const aprobado = respondido && calificacion >= 8;
 
-      // si falta uno sin responder o reprobado, se bloquea certificado
       if (!respondido) todosRespondidos = false;
       if (!aprobado) todosAprobados = false;
 
       const div = document.createElement("div");
-      div.className = `curso ${aprobado ? "aprobado" : "reprobado"}`;
+      div.className = `curso-card ${aprobado ? "aprobado" : "reprobado"}`;
 
       div.innerHTML = `
         <h3>${examen.titulo || "Examen sin título"}</h3>
         <p><strong>Instructor:</strong> ${examen.instructor?.name || "No especificado"}</p>
         <p><strong>Descripción:</strong> ${examen.descripcion || "Sin descripción disponible"}</p>
-        <p>Respondido: ${respondido ? "✅ Sí" : "❌ No"}</p>
-        <p>Calificación: ${respondido ? calificacion : "—"}</p>
+        <p><strong>Respondido:</strong> ${respondido ? "✅ Sí" : "❌ No"}</p>
+        <p><strong>Calificación:</strong> ${respondido ? calificacion : "—"}</p>
       `;
 
       listaCursos.appendChild(div);
     });
 
-    // 🔹 Evaluar si puede generar certificado
-    if (todosRespondidos && todosAprobados && examenes.length > 0) {
+    // Estado para mostrar mensaje al usuario
+    if (certificadoExiste) {
+      mensaje.textContent = "🎓 Ya tienes un certificado generado. Puedes descargarlo nuevamente.";
+      btnCertificado.disabled = false;
+    } else if (todosRespondidos && todosAprobados && examenes.length > 0) {
       mensaje.textContent = "🎉 ¡Felicidades! Puedes generar tu certificado.";
       btnCertificado.disabled = false;
     } else {
@@ -79,7 +92,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 🔹 Acción del botón de certificado
     btnCertificado.addEventListener("click", async () => {
       try {
-        const generarResp = await fetch(`http://localhost:8080/api/certificados/generar`, {
+        // 🟦 SI YA EXISTE → solo descarga
+        if (certificadoExiste) {
+          return descargarCertificado(userId);
+        }
+
+        // 🟩 SI NO EXISTE → generar y descargar
+        const generarResp = await fetch(`https://nuevo-production-e70c.up.railway.app/api/certificados/generar`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -95,18 +114,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         if (!generarResp.ok) throw new Error("Error al generar certificado");
 
-        // Descargar certificado
-        const descargarResp = await fetch(`http://localhost:8080/api/certificados/descargar/${userId}`);
-        if (!descargarResp.ok) throw new Error("Error al descargar certificado");
+        certificadoExiste = true; // ⬅️ Marcamos como generado
 
-        const blob = await descargarResp.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `certificado_${userId}.pdf`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
+        await descargarCertificado(userId);
 
         mensaje.textContent = "✅ Certificado generado y descargado correctamente.";
       } catch (error) {
@@ -120,6 +130,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     mensaje.textContent = "❌ No se pudieron cargar los exámenes.";
   }
 });
+
+async function descargarCertificado(userId) {
+  const resp = await fetch(`https://nuevo-production-e70c.up.railway.app/api/certificados/descargar/${userId}`);
+  if (!resp.ok) throw new Error("Error al descargar certificado");
+
+  const blob = await resp.blob();
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `certificado_${userId}.pdf`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
 
 function volverAlMenu() {
   window.location.href = "../index.html";

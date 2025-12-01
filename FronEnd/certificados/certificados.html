@@ -2,20 +2,44 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Cursos Técnicos</title>
-  <link rel="stylesheet" href="certificados.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificados</title>
+  <link rel="stylesheet" href="../menu/menu.css">
 </head>
 <body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <h2>🎓 Certificados</h2>
+    <div class="navbar-right">
+      <button onclick="volverAlMenu()">⬅️ Volver al Menú</button>
+      <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+    </div>
+  </header>
+
   <div class="container">
-    <h1>📘 Cursos Técnicos</h1>
-    <p id="mensaje"></p>
 
-    <div id="lista-cursos" class="contenedor-cursos"></div>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h3>Panel de Certificados</h3>
+      <div id="menu" class="menu-container"></div>
+    </aside>
 
-    <!-- Botón de certificado oculto al inicio -->
-    <button id="btn-certificado" class="btn-oculto">🎓 Descargar Certificado</button>
+    <!-- Contenido principal -->
+    <main class="main-content">
+      <h1>📘 Cursos con Certificado</h1>
+      <p id="mensaje"></p>
 
-    <button class="btn-volver" onclick="volverAlMenu()">⬅️ Volver al Menú</button>
+      <!-- Aquí se muestran los cursos -->
+      <div id="lista-cursos" class="contenedor-examenes"></div>
+
+      <!-- Botón del certificado -->
+      <button id="btn-certificado" class="btn-oculto">
+        🎓 Descargar Certificado
+      </button>
+
+    </main>
+
   </div>
 
   <script src="certificados.js"></script>

@@ -2,37 +2,65 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crear Examen</title>
+  <link rel="stylesheet" href="../menu/menu.css">
   <link rel="stylesheet" href="crear-examen.css">
 </head>
+
 <body>
+
+  <!-- 🔹 NAVBAR -->
+  <header class="navbar">
+    <h2>📝 Crear Examen</h2>
+    <div class="navbar-right">
+      <button onclick="volverAlMenu()">⬅️ Volver al Menú</button>
+      <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+    </div>  </header>
+
   <div class="container">
-    <h1>🧠 Crear Nuevo Examen</h1>
 
-    <form id="formExamen">
-      <div class="campo">
-        <label for="titulo">Título del examen:</label>
-        <input type="text" id="titulo" required>
-      </div>
+    <!-- 🔹 SIDEBAR -->
+    <aside class="sidebar">
+      <h3>Panel De Creacion De Examenes</h3>
+      <div id="menu" class="menu-container"></div>
+    </aside>
 
-      <div class="campo">
-        <label for="descripcion">Descripción:</label>
-        <input type="text" id="descripcion" required>
-      </div>
+    <!-- 🔹 CONTENIDO PRINCIPAL -->
+<main class="main-content">
 
-      <div class="campo">
-        <label for="instructorId">ID del Instructor:</label>
-        <input type="number" id="instructorId" required>
-      </div>
+  <h1>➕ Crear Nuevo Examen</h1>
 
-      <h2>Preguntas</h2>
-      <div id="preguntas"></div>
+  <form id="formExamen" class="formulario-examen">
 
-      <button type="button" id="agregarPregunta">➕ Agregar Pregunta</button>
-      <button type="submit" id="crearExamen">📤 Crear Examen</button>
-    </form>
+    <div class="campo">
+      <label for="titulo">Título del examen:</label>
+      <input type="text" id="titulo" required>
+    </div>
 
-    <p id="mensaje"></p>
+    <div class="campo">
+      <label for="descripcion">Descripción:</label>
+      <input type="text" id="descripcion" required>
+    </div>
+
+    <h2 class="subtitulo">📝 Preguntas</h2>
+
+    <div id="preguntas" class="contenedor-preguntas"></div>
+
+    <button type="button" id="agregarPregunta" class="btn-secundario">
+      ➕ Agregar Pregunta
+    </button>
+
+    <button type="submit" id="crearExamen" class="btn-principal">
+      📤 Crear Examen
+    </button>
+  </form>
+
+  <p id="mensaje" class="mensaje"></p>
+
+</main>
+
+
   </div>
 
   <script src="crear-examen.js"></script>

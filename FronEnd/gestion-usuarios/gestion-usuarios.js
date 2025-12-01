@@ -1,7 +1,7 @@
 // gestion-usuarios.js
 // Asegúrate de que db.js y sync.js se carguen antes de este archivo.
 
-const BASE_URL = "http://localhost:8080"; // Cambia si tu API está en otro host o puerto
+const BASE_URL = "https://nuevo-production-e70c.up.railway.app"; // Cambia si tu API está en otro host o puerto
 const API_SIN_RANGO = `${BASE_URL}/api/login/sin-rango`;
 const API_USER_PUT = (id) => `${BASE_URL}/api/login/${id}`;
 
@@ -208,3 +208,7 @@ window.addEventListener("online", async () => {
   console.log("✅ Sincronización automática completada");
   await cargarUsuarios(); // refresca la lista con datos actualizados
 });
+function logout() {
+  localStorage.clear();
+  window.location.href = "../../index.html";
+}

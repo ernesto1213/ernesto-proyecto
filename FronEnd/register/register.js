@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('📦 Datos enviados (registro):', registerData);
 
     try {
-      const response = await fetch('http://localhost:8080/api/login/register', {
+      const response = await fetch('https://nuevo-production-e70c.up.railway.app/api/login/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
