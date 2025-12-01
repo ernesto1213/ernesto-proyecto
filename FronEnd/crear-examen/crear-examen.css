@@ -240,3 +240,58 @@
 .opcion button:hover {
   background-color: #9d0000;
 }
+/* Estilo para el contenedor del campo */
+.campo {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Estilo para el label */
+.campo label {
+  font-size: 1.1em;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Estilo para el input de tipo archivo */
+.campo input[type="file"] {
+  font-size: 1em;
+  padding: 10px;
+  border: 2px solid #4CAF50; /* Borde verde */
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  background-color: #f9f9f9; /* Fondo gris claro */
+  transition: all 0.3s ease;
+}
+
+/* Efecto hover para el input */
+.campo input[type="file"]:hover {
+  border-color: #45a049; /* Verde más oscuro */
+  background-color: #f1f1f1;
+}
+
+/* Estilo para el input cuando se selecciona un archivo */
+.campo input[type="file"]:focus {
+  border-color: #45a049;
+  background-color: #e8f5e9; /* Fondo verde claro al enfocarse */
+}
+
+/* Estilo para el botón (opcional si deseas agregar un estilo más visible al input) */
+.campo input[type="file"]::-webkit-file-upload-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Estilo adicional para el botón cuando se pasa el mouse */
+.campo input[type="file"]::-webkit-file-upload-button:hover {
+  background-color: #45a049;
+}

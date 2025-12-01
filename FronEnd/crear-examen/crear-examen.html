@@ -54,6 +54,12 @@
     <button type="submit" id="crearExamen" class="btn-principal">
       📤 Crear Examen
     </button>
+
+<button id="descargarExcel" class="btn-principal">📥 Descargar Formato Excel</button>
+    <div class="campo">
+  <label for="archivoExcel">Subir archivo Excel:</label>
+  <input type="file" id="archivoExcel" accept=".xlsx, .xls">
+</div>
   </form>
 
   <p id="mensaje" class="mensaje"></p>
@@ -62,7 +68,7 @@
 
 
   </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
   <script src="crear-examen.js"></script>
 </body>
 </html>
